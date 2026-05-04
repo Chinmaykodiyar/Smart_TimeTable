@@ -15,7 +15,19 @@ export function AppProvider({ children }) {
       const { data: leaves } = await supabase.from('leave_records').select('*');
       const { data: subs } = await supabase.from('substitutions').select('*');
       if (leaves) {
-        setLeaveRecords(leaves.map(l => ({ id: l.id, teacherId: l.teacher_id, date: l.date, reason: l.reason, createdAt: l.created_at })));
+        setLeaveRecords(leaves.map(l => {
+          let type = 'Sick Leave', notes = '';
+          try {
+            if (l.reason && l.reason.startsWith('{')) {
+              const parsed = JSON.parse(l.reason);
+              type = parsed.type || 'Sick Leave';
+              notes = parsed.notes || '';
+            } else {
+              notes = l.reason || '';
+            }
+          } catch(e) {}
+          return { id: l.id, teacherId: l.teacher_id, date: l.date, reason: l.reason, type, notes, createdAt: l.created_at };
+        }));
       }
       if (subs) {
         setSubstitutions(subs.map(s => ({ 
@@ -25,7 +37,7 @@ export function AppProvider({ children }) {
           dayKey: s.day_key,
           periodIdx: s.period_idx,
           originalTeacherId: s.original_teacher_id,
-          substituteTeacherId: s.substitute_teacher_id,
+          substituteTeacherId: s.substitute_teacher_id === '' ? null : s.substitute_teacher_id,
           subject: s.subject,
           status: s.status,
           autoAssigned: s.auto_assigned
@@ -59,7 +71,7 @@ export function AppProvider({ children }) {
       id,
       teacher_id: leaveData.teacherId,
       date: leaveData.date,
-      reason: leaveData.reason || ''
+      reason: JSON.stringify({ type: leaveData.type || 'Sick Leave', notes: leaveData.notes || '' })
     });
 
     if (newSubs.length > 0) {
@@ -71,7 +83,7 @@ export function AppProvider({ children }) {
           day_key: s.dayKey,
           period_idx: s.periodIdx,
           original_teacher_id: s.originalTeacherId,
-          substitute_teacher_id: s.substituteTeacherId,
+          substitute_teacher_id: s.substituteTeacherId || '',
           subject: s.subject,
           status: s.status,
           auto_assigned: s.autoAssigned
