@@ -40,7 +40,7 @@ export default function TopBar({ onHamburger }) {
 
       <div className="topbar-right">
         {/* Live date */}
-        <div style={{
+        <div className="hide-on-mobile" style={{
           display:'flex', alignItems:'center', gap:'8px',
           background:'#f8fafc', border:'1px solid #e2e8f0',
           borderRadius:'var(--radius-sm)', padding:'6px 12px',

@@ -79,7 +79,7 @@ export default function LeaveManager() {
         </div>
       )}
 
-      <div style={{ display:'grid', gridTemplateColumns:'360px 1fr', gap:'20px', alignItems:'start' }}>
+      <div className="responsive-grid-sidebar-left">
 
         {/* Left: Add Leave Form */}
         <div style={{ display:'flex', flexDirection:'column', gap:'16px' }}>

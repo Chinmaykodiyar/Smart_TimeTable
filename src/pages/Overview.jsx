@@ -174,7 +174,7 @@ export default function Overview() {
       </div>
 
       {/* Bottom: Teacher Roster + Activity Feed */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px' }}>
+      <div className="responsive-grid-2">
 
         {/* Teacher Roster */}
         <div className="card">
