@@ -532,18 +532,23 @@ table.data-table { width: 100%; border-collapse: collapse; }
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
+.responsive-grid-2 > * { min-width: 0; }
+
 .responsive-grid-sidebar {
   display: grid;
   grid-template-columns: 1fr 340px;
   gap: 20px;
   align-items: start;
 }
+.responsive-grid-sidebar > * { min-width: 0; }
+
 .responsive-grid-sidebar-left {
   display: grid;
   grid-template-columns: 360px 1fr;
   gap: 20px;
   align-items: start;
 }
+.responsive-grid-sidebar-left > * { min-width: 0; }
 
 @media (max-width: 900px) {
   .responsive-grid-2 { grid-template-columns: 1fr; }

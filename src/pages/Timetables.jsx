@@ -177,7 +177,7 @@ export default function Timetables() {
       {/* Timetable Card */}
       <div className="card" style={{ padding:'0', overflow:'hidden' }}>
         {/* Card header */}
-        <div style={{ padding:'16px 20px', borderBottom:'1px solid var(--card-border)', display:'flex', alignItems:'center', justifyContent:'space-between', background:'#fafbff' }}>
+        <div style={{ padding:'16px 20px', borderBottom:'1px solid var(--card-border)', display:'flex', flexWrap:'wrap', alignItems:'center', justifyContent:'space-between', gap:'12px', background:'#fafbff' }}>
           <div>
             <div style={{ fontWeight:700, fontSize:'1rem' }}>{cls?.name} — Weekly Timetable</div>
             <div style={{ fontSize:'0.75rem', color:'var(--text-muted)', marginTop:'2px' }}>{cls?.room} • {cls?.students} students</div>
